@@ -1,4 +1,4 @@
-# Preface
+# Begin
 
 When I tried to find the AXIDMA example design with Petalinux on Versal, I just cannot find one through the Internal. In my mind, this should be a quite straightforward design and just a piece of cake. As digging deeper, it turned out the design is quite complicated, especially on the software side. It might because that I am not a software engineer. The whole DMA driver start making me confuse after considering the multi-threads, cache coherence, kernel memory management.  Anyway, its a nice journey to learn something new. 
  
@@ -228,6 +228,36 @@ The ILA should have capture the AXI data like following waveform.
 ![System](./doc/ila_capture.png)
 
 
+# Before closing
 
-# Performance Optimization
+## Understand more about drivers
+
+I was quite surprised when I tried to understand the drivers. From hardware prospect, the DMA feature is very straightforward, just moving data from one address to another. You only need to configure few registers to enable this DMA engine. But in software driver world, there are lots of things need to take care. 
+
+### Why SG(Scatter Gather) is needed ?
+
+If we could always get a huge continue physical memory, we don't need SG feature. You could reserve a block of memory and make it only available for DMA engine. But it's quite difficult to get a huge continue physical memory for DMA engine under Petalinux managed memory. We could only get a limited pieces of memory at each time, and we can't guarantee kernel could give you continue memory space. So, the SG feature has become a must-have feature in modern Petalinux. 
+
+DMA driver have different layers. The axidmatest.c is upper layer to test DMA engine performance based on DMA drivers. Here is the note to understand more. 
+
+![axidmatest.md](./doc/axidmatest.md)
+
+xilinx_dma.c is the lower level of driver. It provided the methods and functions for other kernel modules. 
+
+![xilinx_dma.md](./doc/xilinx_dma.md)
+
+
+
+## Performance Optimization
+
+This is an interesting topic. The knowledge of HW and also SW is necessary to see where the bottleneck is and how to improve the system efficiency. 
+
+Here are some pointers but I don't want to expand on those topics:
+* AXI Burst Length
+* DMA length
+* DMA engine working frequency and AXI bus width
+* Number of DMA engines
+* Polling mode or interrupt mode
+
+
 
