@@ -1,6 +1,6 @@
 # Begin
 
-When I tried to find the AXIDMA example design with Petalinux on Versal, I just cannot find one through the Internal. In my mind, this should be a quite straightforward design and just a piece of cake. As digging deeper, it turned out the design is quite complicated, especially on the software side. It might because that I am not a software engineer. The whole DMA driver start making me confuse after considering the multi-threads, cache coherence, kernel memory management.  Anyway, its a nice journey to learn something new. 
+When I tried to find the AXIDMA example design with Petalinux on Versal, I just cannot find one through the Internal. In my mind, this should be a quite straightforward design and just a piece of cake. As digging deeper, it turned out the design is quite complicated, especially on the software side. It might because that I am not a software engineer. The whole DMA driver start making me confuse after considering the multi-threads, cache coherence, kernel memory management.  Anyway, it's a nice journey to learn something new. 
  
  
 # Circumstance 
